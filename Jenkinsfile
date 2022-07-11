@@ -15,7 +15,7 @@ pipeline{
             }
         }
 
-        // Stage2 : Testing
+        // Stage 2 : Testing
         stage ('Test'){
             steps {
                 echo ' testing......'
@@ -23,16 +23,17 @@ pipeline{
             }
         }
 
-        // Stage3 : Publish the source code to Sonarqube
-        stage ('Sonarqube Analysis'){
+        // Stage 3 : Deploying
+        stage ('Deploy'){
             steps {
-                echo ' Source code published to Sonarqube for SCA......'
-                withSonarQubeEnv('sonarqube'){ // You can override the credential to be used
-                     sh 'mvn sonar:sonar'
-                }
+                echo 'deploying......'
 
             }
         }
+
+
+
+       
 
         
         
