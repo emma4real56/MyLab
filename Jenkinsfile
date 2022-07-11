@@ -26,11 +26,11 @@ pipeline{
         //Stage 3: Publish the Artifacts to Nexus
         stage ('Publish to Nexus'){
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'VinayDevOpsLab', classifier: '', file: 'target/VinayDevOpsLab-0.0.4-SNAPSHOT', type: 'war']], credentialsId: '12e0c126-fec2-4659-9f64-cd70d55b0dde', groupId: 'com.vinaysdevopslab', nexusUrl: '172.20.10.18:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'EmmaDevopsLab-SNAPSHOT', version: '0.0.4-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: 'EmmaDevOpsLab', classifier: '', file: 'target/EmmaDevopsLab-0.0.4-SNAPSHOT', type: 'war']], credentialsId: '12e0c126-fec2-4659-9f64-cd70d55b0dde', groupId: 'com.emmadevopslab', nexusUrl: '172.20.10.18:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'EmmaDevopsLab-SNAPSHOT', version: '0.0.4-SNAPSHOT'
             }
         }
 
-        // Stage 3 : Deploying
+        // Stage 4 : Deploying
         stage ('Deploy'){
             steps {
                 echo 'deploying......'
