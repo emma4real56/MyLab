@@ -26,7 +26,7 @@ pipeline{
         //Stage 3: Publish the Artifacts to Nexus
         stage ('Publish to Nexus'){
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'EmmaDevOpsLab', classifier: '', file: 'target/EmmaDevopsLab-0.0.4-SNAPSHOT', type: 'war']], credentialsId: '12e0c126-fec2-4659-9f64-cd70d55b0dde', groupId: 'com.emmadevopslab', nexusUrl: '172.20.10.18:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'EmmaDevopsLab-SNAPSHOT', version: '0.0.4-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: 'EmmaDevOpsLab', classifier: '', file: 'target/EmmaDevOpsLab-0.0.4-SNAPSHOT', type: 'war']], credentialsId: '12e0c126-fec2-4659-9f64-cd70d55b0dde', groupId: 'com.emmadevopslab', nexusUrl: '3.239.49.233:8081/repository/EmmaDevopsLab-SNAPSHOT/', nexusVersion: 'nexus3', protocol: 'http', repository: 'EmmaDevopsLab-SNAPSHOT', version: '0.0.4-SNAPSHOT'
             }
         }
 
