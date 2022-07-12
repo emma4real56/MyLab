@@ -46,7 +46,7 @@ pipeline{
                 nexusUrl: '172.20.10.18:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
-                repository: "${NexusRepo}", 
+                repository: "EmmaDevopsLab-SNAPSHOT",
                 version: "${Version}"
              }
             }
