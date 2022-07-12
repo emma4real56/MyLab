@@ -34,22 +34,26 @@ pipeline{
         // Stage3 : Publish the artifacts to Nexus
         stage ('Publish to Nexus'){
             steps {
-              
+                script {
+
+                def NexusRepo = Version.endsWith("SNAPSHOT") ? "EmmaDevopsLab-SNAPSHOT" : "EmmaDevopsLab-RELEASE"
 
                 nexusArtifactUploader artifacts: 
                 [[artifactId: "${ArtifactId}", 
                 classifier: '', 
                 file: "target/${ArtifactId}-${Version}.war", 
                 type: 'war']], 
-                credentialsId: 'Nexus',
+                credentialsId: 'Nexus', 
                 groupId: "${GroupId}", 
                 nexusUrl: '172.20.10.18:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
-                repository: "EmmaDevopsLab-SNAPSHOT",
+                repository: "${NexusRepo}", 
                 version: "${Version}"
+             }
             }
         }
+       
 
          // Stage 4 : Deployment
         stage ('Deploy'){
