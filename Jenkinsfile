@@ -48,8 +48,16 @@ pipeline{
                 protocol: 'http', 
                 repository: "EmmaDevopsLab-SNAPSHOT",
                 version: "${Version}"
-             }
             }
+        }
+
+         // Stage 2 : Deployment
+        stage ('Deploy'){
+            steps {
+                echo ' deploying......'
+
+            }
+        }
     }
 
 }
