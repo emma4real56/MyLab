@@ -5,12 +5,15 @@ pipeline{
         maven 'maven'
     }
 
+
     environment{
        ArtifactId = readMavenPom().getArtifactId()
        Version = readMavenPom().getVersion()
        Name = readMavenPom().getName()
        GroupId = readMavenPom().getGroupId()
     }
+	
+    
     
 
     stages {
@@ -36,14 +39,14 @@ pipeline{
             steps {
                 script {
 
-                def NexusRepo = Version.endsWith("SNAPSHOT") ? "EmmaDevopsLab-SNAPSHOT" : "EmmaDevopsLab-RELEASE"
+                  def NexusRepo = Version.endsWith("SNAPSHOT") ? "EmmaDevopsLab-SNAPSHOT" : "EmmaDevopsLab-RELEASE"
 
                 nexusArtifactUploader artifacts: 
                 [[artifactId: "${ArtifactId}", 
                 classifier: '', 
                 file: "target/${ArtifactId}-${Version}.war", 
                 type: 'war']], 
-                credentialsId: 'Nexus-Artifact',
+                credentialsId: 'Nexus', 
                 groupId: "${GroupId}", 
                 nexusUrl: '172.20.10.186:8081', 
                 nexusVersion: 'nexus3', 
@@ -53,7 +56,6 @@ pipeline{
              }
             }
         }
-		
 
 
        // Stage 4 : Deployment
