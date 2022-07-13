@@ -43,7 +43,7 @@ pipeline{
                 type: 'war']], 
                 credentialsId: 'Nexus', 
                 groupId: "${GroupId}", 
-                nexusUrl: '172.20.10.18:8081', 
+                nexusUrl: '172.20.10.186:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: "EmmaDevopsLab-SNAPSHOT", 
