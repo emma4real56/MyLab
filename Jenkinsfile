@@ -54,13 +54,11 @@ pipeline{
        
 
          // Stage 4 : Deployment
-        stage ('Deploy'){
+         stage ('Deploy'){
             steps {
                 echo ' deploying......'
 
             }
         }
-    
-
 }
 
