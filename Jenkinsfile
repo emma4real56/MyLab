@@ -41,7 +41,7 @@ pipeline{
 
                 def NexusRepo = Version.endsWith("SNAPSHOT") ? "EmmaDevopsLab-SNAPSHOT" : "EmmaDevopsLab-RELEASE"
 
-                nexusArtifactUploader artifacts: 
+                nexusArtifactUploader artifacts:  
                 [[artifactId: "${ArtifactId}", 
                 classifier: '', 
                 file: "target/${ArtifactId}-${Version}.war", 
