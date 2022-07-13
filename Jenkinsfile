@@ -36,10 +36,10 @@ pipeline{
 
         // Stage3 : Publish the artifacts to Nexus
         stage ('Publish to Nexus'){
-            steps {
+          steps {
                 script {
 
-                  def NexusRepo = Version.endsWith("SNAPSHOT") ? "EmmaDevopsLab-SNAPSHOT" : "EmmaDevopsLab-RELEASE"
+                def NexusRepo = Version.endsWith("SNAPSHOT") ? "EmmaDevopsLab-SNAPSHOT" : "EmmaDevopsLab-RELEASE"
 
                 nexusArtifactUploader artifacts: 
                 [[artifactId: "${ArtifactId}", 
@@ -54,23 +54,23 @@ pipeline{
                 repository: "${NexusRepo}", 
                 version: "${Version}"
              }
-            }
+            }  
         }
 
 
-       // Stage 4 : Deployment
-         stage ('Deploy'){
-            steps {
-                echo ' deploying......'
-            }   
-
+        // Stage 4 : Print some information
+        stage ('Print Environment variables'){
+                    steps {
+                        echo "Artifact ID is '${ArtifactId}'"
+                        echo "Version is '${Version}'"
+                        echo "GroupID is '${GroupId}'"
+                        echo "Name is '${Name}'"
+                    }
         
-        
-        } 
+        }
     
     
-    }
-
+    }  
 
 }
 
