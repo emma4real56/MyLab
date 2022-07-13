@@ -5,6 +5,12 @@ pipeline{
         maven 'maven'
     }
 
+    environment{
+       ArtifactId = readMavenPom().getArtifactId()
+       Version = readMavenPom().getVersion()
+       Name = readMavenPom().getName()
+       GroupId = readMavenPom().getGroupId()
+    }
     
 
     stages {
@@ -25,13 +31,29 @@ pipeline{
             }
         }
 
-        // Stage 3 : Publish over ssh
-        stage ('Publish'){
+        // Stage3 : Publish the artifacts to Nexus
+        stage ('Publish to Nexus'){
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'EmmaDevOpsLab', classifier: '', file: 'target/EmmaDevOpsLab-0.0.4-SNAPSHOT.war', type: 'war']], credentialsId: 'Nexus', groupId: 'com.emmadevopslab', nexusUrl: '172.20.10.186:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'EmmaDevopsLab-SNAPSHOT', version: '0.0.4-SNAPSHOT'
+                script {
 
+                def NexusRepo = Version.endsWith("SNAPSHOT") ? "EmmaDevopsLab-SNAPSHOT" : "EmmaDevopsLab-RELEASE"
+
+                nexusArtifactUploader artifacts: 
+                [[artifactId: "${ArtifactId}", 
+                classifier: '', 
+                file: "target/${ArtifactId}-${Version}.war", 
+                type: 'war']], 
+                credentialsId: 'Nexus',
+                groupId: "${GroupId}", 
+                nexusUrl: '172.20.10.186:8081', 
+                nexusVersion: 'nexus3', 
+                protocol: 'http', 
+                repository: "${NexusRepo}", 
+                version: "${Version}"
+             }
             }
         }
+		
 
 
        // Stage 4 : Deployment
