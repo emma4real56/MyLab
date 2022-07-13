@@ -68,6 +68,15 @@ pipeline{
                     }
         
         }
+
+
+        // Stage 5 : Deploy
+        stage ('Deployment'){
+            steps {
+                echo ' Deploying......'
+
+            }
+        }
     
     
     }  
