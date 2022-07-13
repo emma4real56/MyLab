@@ -50,7 +50,7 @@ pipeline{
                 version: "${Version}"
              }
             }
-        }
+    
        
 
          // Stage 4 : Deployment
@@ -59,6 +59,6 @@ pipeline{
                 echo ' deploying......'
 
             }
-        }
+         }
 }
 
