@@ -73,7 +73,26 @@ pipeline{
         // Stage 5 : Deploy
         stage ('Deployment'){
             steps {
-                echo ' Deploying......'
+                echo "Deploying......"
+                sshPublisher(publishers: 
+                [sshPublisherDesc(
+                    configName: 'Ansible_Controller', 
+                    transfers: [
+                        sshTransfer(cleanRemote: false, 
+                        excludes: '', 
+                        execCommand: 'ansible-playbook /home/ec2-user/control/exercise1/download.yaml -i /home/ec2-user/control/exercise1/inventory', 
+                        execTimeout: 120000, 
+                        flatten: false, 
+                        makeEmptyDirs: false, 
+                        noDefaultExcludes: false, 
+                        patternSeparator: '[, ]+', 
+                        remoteDirectory: '', 
+                        remoteDirectorySDF: false, 
+                        removePrefix: '', 
+                        sourceFiles: '')], 
+                    usePromotionTimestamp: false, 
+                    useWorkspaceInPromotion: false, 
+                    verbose: false)])
 
             }
         }
