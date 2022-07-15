@@ -81,7 +81,8 @@ pipeline{
                         sshTransfer(
                             cleanRemote: false, 
                             execCommand: 'ansible-playbook /home/ec2-user/control/exercise1/download.yaml -i /home/ec2-user/control/exercise1/inventory', 
-                        )    execTimeout: 120000 
+                            execTimeout: 120000
+                        )     
                     ], 
                     usePromotionTimestamp: false, 
                     useWorkspaceInPromotion: false, 
