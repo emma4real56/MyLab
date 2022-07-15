@@ -75,23 +75,18 @@ pipeline{
             steps {
                 echo "Deploying......"
                 sshPublisher(publishers: 
-                [sshPublisherDesc(configName: 'Ansible-Control', 
-                transfers: [
-                    sshTransfer(cleanRemote: false, 
-                    excludes: '', 
-                    execCommand: '', 
-                    execTimeout: 120000, 
-                    flatten: false, 
-                    makeEmptyDirs: false, 
-                    noDefaultExcludes: false, 
-                    patternSeparator: '[, ]+', 
-                    remoteDirectory: '', 
-                    remoteDirectorySDF: false, 
-                    removePrefix: '', 
-                    sourceFiles: '')], 
+                [sshPublisherDesc(
+                    configName: 'Ansible-Control', 
+                    transfers: [
+                        sshTransfer(
+                            cleanRemote: false, 
+                            execCommand: 'ansible-playbook /home/ec2-user/control/exercise1/download.yaml -i /home/ec2-user/control/exercise1/inventory', 
+                            execTimeout: 120000 
+                     
                     usePromotionTimestamp: false, 
                     useWorkspaceInPromotion: false, 
-                    verbose: false)])
+                    verbose: false)
+                    ])
                 
 
             }
